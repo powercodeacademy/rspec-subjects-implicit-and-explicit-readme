@@ -72,6 +72,7 @@ RSpec.describe Recipe do
     subject(:pizza) { described_class.new("Pizza", [tomato, cheese]) }
 
     it "can remove an ingredient by name" do
+      pizza.remove_ingredient(tomato)
       expect(pizza.ingredients).to_not include([tomato])
     end
   end
