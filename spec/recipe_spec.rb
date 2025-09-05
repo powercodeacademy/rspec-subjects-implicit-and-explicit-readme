@@ -59,7 +59,21 @@ RSpec.describe Recipe do
     end
   end
 
-  # Pending specs for students
-  pending "returns steps as a numbered list string" # students implement Recipe#steps_list
-  pending "can remove an ingredient by name" # students implement Recipe#remove_ingredient
+  describe "#steps_list" do
+    subject { described_class.new("Pasta", [], ["Boil water", "Add pasta"])}
+    it "returns steps as a numbered list string" do
+      expect(subject.steps_list).to eq("1. Boil water\n2. Add pasta")
+    end
+  end
+
+  describe "#remove_ingredient" do 
+    let(:tomato) { Ingredient.new("Tomato") }
+    let(:cheese) { Ingredient.new("Cheese") }
+    subject(:pizza) { described_class.new("Pizza", [tomato, cheese]) }
+
+    it "can remove an ingredient by name" do
+      pizza.remove_ingredient(tomato)
+      expect(pizza.ingredients).to_not include([tomato])
+    end
+  end
 end

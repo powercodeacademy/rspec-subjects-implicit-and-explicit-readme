@@ -15,11 +15,21 @@ class Recipe
     @steps << step
   end
 
+  def steps_list
+    @steps.map.with_index do |step, i| 
+      "#{i + 1}. #{step}" 
+    end.join("\n")
+  end
+
   def vegetarian?
     ingredients.all?(&:vegetarian?)
   end
 
   def ingredient_names
     ingredients.map(&:name)
+  end
+
+  def remove_ingredient(ingredient)
+    @ingredients.delete(ingredient)
   end
 end
